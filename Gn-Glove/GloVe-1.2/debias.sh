@@ -15,7 +15,8 @@ if [ ! -e text8 ]; then
 fi
 DIMENSION=$1
 PARA=$2
-CORPUS=/bigtemp/cj7an/en_wiki_corpus
+#CORPUS=/bigtemp/cj7an/en_wiki_corpus
+CORPUS= "C:\\Users\\myfir\\Downloads\\text8"
 #CORPUS=$2
 VOCAB_FILE=vocab"$1".txt
 COOCCURRENCE_FILE=cooccurrence"$1".bin
