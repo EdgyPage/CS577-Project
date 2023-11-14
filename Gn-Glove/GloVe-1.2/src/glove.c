@@ -34,13 +34,6 @@
 #include "data_struct.h"
 #include "get_vocabhash.h"
 
-//modifications
-#include <stdlib.h>
-#include <intrin.h>
-#include <malloc.h>
-#include <windows.h>
-
-//modifications
 
 //typedef struct hashrec {
 //    char        *word;
