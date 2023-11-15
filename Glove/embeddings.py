@@ -77,9 +77,9 @@ for pair in genderPairs:
         if word in embeds.keys():
             wordEmbed = embeds[word]
 
-            dist1 = embedCos(g1Embed, wordEmbed)
-            dist2 = embedCos(g2Embed, wordEmbed)
+            dist1 = round(embedCos(g1Embed, wordEmbed), 4)
+            dist2 = round(embedCos(g2Embed, wordEmbed), 4)
 
-            print(f'Pair: {g1}, {g2} | Dist-- {word}: {dist1}, {dist2}')
+            print(f'Pair: {g1}, {g2} | Cos Dist-- {word}: {dist1}, {dist2}')
         else:
             continue
