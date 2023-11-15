@@ -1,6 +1,7 @@
 import numpy as np
 from numpy.linalg import norm
 from typing import Callable
+import csv
 
 embeds = dict()
 
@@ -44,11 +45,41 @@ def farthestWordsNorm(embedDict: dict , arr: np.ndarray, n: int = 5):
 cat = embeds['cat']
 dog = embeds['dog']
 
-print(f'norm: {norm(cat - dog)}')
-cosine = np.dot(cat, dog) / (norm(cat) * norm(dog))
-print(f'cosine: {cosine}')
+if False:
+    print(f'norm: {norm(cat - dog)}')
+    cosine = np.dot(cat, dog) / (norm(cat) * norm(dog))
+    print(f'cosine: {cosine}')
 
-top = closestWordsNorm(embeds,cat)
-bot = farthestWordsNorm(embeds, cat)
-print(top)
-print(bot)
+if False:
+    top = closestWordsNorm(embeds,cat)
+    bot = farthestWordsNorm(embeds, cat)
+    print(top)
+    print(bot)
+
+genderPairs = [('female', 'male'), ('her', 'his')]
+associatedWords = []
+
+with open('GenderPairs.csv', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+
+    for row in reader:
+        associationWord = row[0]
+        print(associationWord)
+        associatedWords.append(associationWord)
+
+for pair in genderPairs:
+    for word in associatedWords:
+        g1 = pair[0]
+        g2 = pair[1]
+
+        g1Embed = embeds[g1]
+        g2Embed = embeds[g2]
+        if word in embeds.keys():
+            wordEmbed = embeds[word]
+
+            dist1 = embedCos(g1Embed, wordEmbed)
+            dist2 = embedCos(g2Embed, wordEmbed)
+
+            print(f'Pair: {g1}, {g2} | Dist from {word}: {dist1}, {dist2}')
+        else:
+            continue
