@@ -64,7 +64,7 @@ with open('GenderPairs.csv', 'r', encoding='utf-8') as file:
 
     for row in reader:
         associationWord = row[0]
-        print(associationWord)
+        #print(associationWord)
         associatedWords.append(associationWord)
 
 for pair in genderPairs:
@@ -80,6 +80,6 @@ for pair in genderPairs:
             dist1 = embedCos(g1Embed, wordEmbed)
             dist2 = embedCos(g2Embed, wordEmbed)
 
-            print(f'Pair: {g1}, {g2} | Dist from {word}: {dist1}, {dist2}')
+            print(f'Pair: {g1}, {g2} | Dist-- {word}: {dist1}, {dist2}')
         else:
             continue
