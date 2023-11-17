@@ -16,7 +16,7 @@ fi
 DIMENSION=$1
 PARA=$2
 #CORPUS=/bigtemp/cj7an/en_wiki_corpus
-CORPUS= "C:\\Users\\myfir\\Downloads\\text8"
+CORPUS=text8
 #CORPUS=$2
 VOCAB_FILE=vocab"$1".txt
 COOCCURRENCE_FILE=cooccurrence"$1".bin
@@ -24,14 +24,14 @@ COOCCURRENCE_SHUF_FILE=cooccurrence"$1".shuf.bin
 BUILDDIR=build
 SAVE_FILE=vectors"$1"-"$2"
 VERBOSE=2
-MEMORY=100.0
-VOCAB_MIN_COUNT=50
-VECTOR_SIZE=$1
-MAX_ITER=100
-WINDOW_SIZE=10
+MEMORY=4.0
+VOCAB_MIN_COUNT=5
+VECTOR_SIZE=50
+MAX_ITER=15
+WINDOW_SIZE=15
 BINARY=2
 NUM_THREADS=8
-X_MAX=100
+X_MAX=10
 VOCAB_HASH_FILE=hashdump"$1".txt
 MALE_WORD_FILE=../wordlist/male_word_file.txt
 FEMALE_WORD_FILE=../wordlist/female_word_file.txt
@@ -53,7 +53,7 @@ if [[ $? -eq 0 ]]
 #           elif [ "$1" = 'octave' ]; then
 #               octave < ./eval/octave/read_and_evaluate_octave.m 1>&2 
 #           else
-               python2 eval/python/evaluate.py --vocab_file $VOCAB_FILE --vectors_file $SAVE_FILE".txt"
+               python3 eval/python/evaluate.py --vocab_file $VOCAB_FILE --vectors_file $SAVE_FILE".txt"
 #           fi
 #       fi
     fi
