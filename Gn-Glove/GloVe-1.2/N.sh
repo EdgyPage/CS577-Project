@@ -18,7 +18,7 @@ make
 #CORPUS=/bigtemp/cj7an/en_wiki_corpus
 #CORPUS=text8
 CORPUS=$2
-VOCAB_FILE=vocab.txt
+VOCAB_FILE=vocab"$1".txt
 COOCCURRENCE_FILE=cooccurrence.bin
 COOCCURRENCE_SHUF_FILE=cooccurrence.shuf.bin
 BUILDDIR=build
