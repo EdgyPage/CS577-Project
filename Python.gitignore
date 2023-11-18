@@ -1,16 +1,16 @@
 #Adding custom ignore paths
 /Gn-Glove/GloVe-1.2/*.bin
 /Gn-Glove/GloVe-1.2/text8
-/Gn-Glove/GloVe-1.2/*.txt
+/Gn-Glove/GloVe-1.2/vocab*.txt
 /Glove/*.bin
 /Glove/text8
-/Glove/*.txt
+/Glove/vocab*.txt
 ./Gn-Glove/GloVe-1.2/*.bin
 ./Gn-Glove/GloVe-1.2/text8
-./Gn-Glove/GloVe-1.2/*.txt
+./Gn-Glove/GloVe-1.2/vocab*.txt
 ./Glove/*.bin
 ./Glove/text8
-./Glove/*.txt
+./Glove/vocab*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
