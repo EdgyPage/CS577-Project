@@ -59,3 +59,4 @@ if [[ $? -eq 0 ]]
     fi
   fi
 fi
+mv $SAVE_FILE".txt" ../../Results

@@ -56,3 +56,4 @@ if [ "$CORPUS" = 'text8' ]; then
        $PYTHON eval/python/evaluate.py
    fi
 fi
+mv $SAVE_FILE".txt" ../Results
