@@ -5,6 +5,12 @@
 /Glove/*.bin
 /Glove/text8
 /Glove/*.txt
+./Gn-Glove/GloVe-1.2/*.bin
+./Gn-Glove/GloVe-1.2/text8
+./Gn-Glove/GloVe-1.2/*.txt
+./Glove/*.bin
+./Glove/text8
+./Glove/*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
