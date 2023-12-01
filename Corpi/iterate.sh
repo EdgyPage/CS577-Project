@@ -20,7 +20,7 @@ for file in *; do
         echo "Running script on file: $file"
         # Execute your script on each file
         cd ../Gn-Glove/GloVe-1.2/
-        bash N.sh "$file_name_without_extension" ../../Corpi/"$file" 
+        bash N.sh $file_name_without_extension ../../Corpi/"$file" 
         cd ../../Corpi/
     fi
 done

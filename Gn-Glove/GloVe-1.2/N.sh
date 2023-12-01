@@ -24,7 +24,7 @@ COOCCURRENCE_SHUF_FILE=cooccurrence.shuf.bin
 BUILDDIR=build
 SAVE_FILE=Nvectors"$1"
 VERBOSE=2
-MEMORY=4.0
+MEMORY=10.0
 VOCAB_MIN_COUNT=5
 VECTOR_SIZE=50
 MAX_ITER=15
@@ -46,8 +46,8 @@ if [[ $? -eq 0 ]]
     if [[ $? -eq 0 ]]
     then
        $BUILDDIR/glove -save-file $SAVE_FILE -threads $NUM_THREADS -input-file $COOCCURRENCE_SHUF_FILE -x-max $X_MAX -iter $MAX_ITER -vector-size $VECTOR_SIZE -binary $BINARY -vocab-file $VOCAB_FILE -verbose $VERBOSE -vocab-hash-file $VOCAB_HASH_FILE -male-word-file $MALE_WORD_FILE -female-word-file $FEMALE_WORD_FILE
-#       if [[ $? -eq 0 ]]
-#       then
+       if [[ $? -eq 0 ]]
+       then
 #           if [ "$1" = 'matlab' ]; then
 #               matlab -nodisplay -nodesktop -nojvm -nosplash < ./eval/matlab/read_and_evaluate.m 1>&2 
 #           elif [ "$1" = 'octave' ]; then
@@ -55,7 +55,7 @@ if [[ $? -eq 0 ]]
 #           else
                python3 eval/python/evaluate.py --vocab_file $VOCAB_FILE --vectors_file $SAVE_FILE".txt"
 #           fi
-#       fi
+       fi
     fi
   fi
 fi
