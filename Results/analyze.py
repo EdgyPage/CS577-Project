@@ -85,43 +85,55 @@ def distanceVector(spotlightWords: [str], pairs : [(str, str)], embeds: dict):
         g2Dists = []
         g1 = pair[0]
         g2 = pair[1]
-        for word in spotlightWords:
-            g1Embed = embeds[g1]
-            g2Embed = embeds[g2]
-            if word in embeds.keys():
-                wordEmbed = embeds[word]
+        if g1 in embeds.keys() and g2 in embeds.keys():
+            for word in spotlightWords:
+                g1Embed = embeds[g1]
+                g2Embed = embeds[g2]
+                if word in embeds.keys():
+                    wordEmbed = embeds[word]
 
-                dist1 = round(embedCos(g1Embed, wordEmbed), 4)
-                dist2 = round(embedCos(g2Embed, wordEmbed), 4)
+                    dist1 = round(embedCos(g1Embed, wordEmbed), 4)
+                    dist2 = round(embedCos(g2Embed, wordEmbed), 4)
 
-                g1Dists.append(dist1)
-                g2Dists.append(dist2)
+                    g1Dists.append(dist1)
+                    g2Dists.append(dist2)
 
-            else:
-                continue
-        g1Dists = np.array(g1Dists)
-        g2Dists = np.array(g2Dists)
-        embeds['DistanceVector'] = {}
-        embeds['DistanceVector'][g1] = g1Dists
-        embeds['DistanceVector'][g2] = g2Dists
+                else:
+                    continue
+            g1Dists = np.array(g1Dists)
+            g2Dists = np.array(g2Dists)
+            embeds['DistanceVector'] = {}
+            embeds['DistanceVector'][g1] = g1Dists
+            embeds['DistanceVector'][g2] = g2Dists
 
 def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, genderEmbeds: dict, emphasize:[str] = []):
     
+    gkeys = genderEmbeds.keys()
+    nkeys = neutralEmbeds.keys()
+
     for g1, g2 in pairs:
-        plt.scatter(genderEmbeds[g1], neutralEmbeds[g1], s= .5, label = 'Male', color = 'blue')
-        plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], s= .5, label = 'Female', color = 'red')
-        plt.xlabel('Gendered Cosine Distance')
-        plt.ylabel('Neutral Cosine Distance')
-        plt.title(f'{g1}/{g2} Distances From Word List')
-        indices = []
-        for empWord in emphasize:
+        if g1 in gkeys and g1 in nkeys and g2 in gkeys and g2 in nkeys:
+            plt.scatter(genderEmbeds[g1], neutralEmbeds[g1], s= .5, label = 'Male', color = 'blue')
+            plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], s= .5, label = 'Female', color = 'red')
+            plt.xlabel('Gendered Cosine Distance')
+            plt.ylabel('Neutral Cosine Distance')
+            plt.title(f'{g1}/{g2} Distances From Word List')
+            """
+            indices = []
+            for empWord in emphasize:
             indices.append(spotlightWords.index(empWord))
+            """
+        
+        
 
-        x_values = np.linspace(min(min(genderEmbeds[g1]), min(neutralEmbeds[g1]), min(genderEmbeds[g2]), min(neutralEmbeds[g2])),\
+            x_values = np.linspace(min(min(genderEmbeds[g1]), min(neutralEmbeds[g1]), min(genderEmbeds[g2]), min(neutralEmbeds[g2])),\
                                 max(max(genderEmbeds[g1]), max(neutralEmbeds[g1]), max(genderEmbeds[g2]), max(neutralEmbeds[g2])), 1000)
-        plt.plot(x_values, x_values, color='black', alpha = .2, linestyle='-')
+            plt.plot(x_values, x_values, color='black', alpha = .2, linestyle='-')
 
-        for index in indices:
-            plt.scatter(genderEmbeds[g1][index], neutralEmbeds[g1][index], marker = '^', label = f'{spotlightWords[index]}', color = 'blue')
-            plt.scatter(genderEmbeds[g2][index], neutralEmbeds[g2][index], marker = '^', label = f'{spotlightWords[index]}', color = 'red')
-        plt.show()
+            """
+            for i, index in enumerate(indices):
+                plt.scatter(genderEmbeds[spotlightWords[index]][index], neutralEmbeds[spotlightWords[index]][index], marker = '^', label = f'{spotlightWords[index]}', color = 'blue')
+                plt.scatter(genderEmbeds[g2][index], neutralEmbeds[g2][index], marker = '^', label = f'{spotlightWords[index]}', color = 'red')
+            """
+        
+            plt.show()
