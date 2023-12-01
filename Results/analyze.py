@@ -108,16 +108,20 @@ def distanceVector(spotlightWords: [str], pairs : [(str, str)], embeds: dict):
 def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, genderEmbeds: dict, emphasize:[str] = []):
     
     for g1, g2 in pairs:
-        plt.scatter(genderEmbeds[g1], neutralEmbeds[g1], label = 'Male', color = 'blue')
-        plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], label = 'Female', color = 'red')
+        plt.scatter(genderEmbeds[g1], neutralEmbeds[g1], s= .5, label = 'Male', color = 'blue')
+        plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], s= .5, label = 'Female', color = 'red')
         plt.xlabel('Gendered Cosine Distance')
         plt.ylabel('Neutral Cosine Distance')
         plt.title(f'{g1}/{g2} Distances From Word List')
         indices = []
         for empWord in emphasize:
             indices.append(spotlightWords.index(empWord))
-        
+
+        x_values = np.linspace(min(min(genderEmbeds[g1]), min(neutralEmbeds[g1]), min(genderEmbeds[g2]), min(neutralEmbeds[g2])),\
+                                max(max(genderEmbeds[g1]), max(neutralEmbeds[g1]), max(genderEmbeds[g2]), max(neutralEmbeds[g2])), 1000)
+        plt.plot(x_values, x_values, color='black', alpha = .2, linestyle='-')
+
         for index in indices:
             plt.scatter(genderEmbeds[g1][index], neutralEmbeds[g1][index], marker = '^', label = f'{spotlightWords[index]}', color = 'blue')
             plt.scatter(genderEmbeds[g2][index], neutralEmbeds[g2][index], marker = '^', label = f'{spotlightWords[index]}', color = 'red')
-    plt.show()
+        plt.show()
