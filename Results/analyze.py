@@ -60,7 +60,7 @@ if False:
 
 def spotlightWords(spotlightPath: str):
     spotlightWords = []
-    with open(spotlightPath, 'r', encoding='utf-8') as file:
+    with open(spotlightPath, 'r', encoding='utf-8-sig') as file:
         reader = csv.reader(file)
 
         for row in reader:
@@ -71,7 +71,7 @@ def spotlightWords(spotlightPath: str):
 
 def genderPairs(pairsPath: str):
     tuplePairs = []
-    with open(pairsPath, 'r', encoding='utf-8') as file:
+    with open(pairsPath, 'r', encoding='utf-8-sig') as file:
         reader = csv.reader(file)
         for row in reader:
             p1 = row[0]
@@ -101,15 +101,15 @@ def distanceVector(spotlightWords: [str], pairs : [(str, str)], embeds: dict):
                 continue
         g1Dists = np.array(g1Dists)
         g2Dists = np.array(g2Dists)
-    embeds['DistanceVector'][g1] = g1Dists
-    embeds['DistanceVector'][g2] = g2Dists
+        embeds['DistanceVector'] = {}
+        embeds['DistanceVector'][g1] = g1Dists
+        embeds['DistanceVector'][g2] = g2Dists
 
 def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, genderEmbeds: dict, emphasize:[str] = []):
     
     for g1, g2 in pairs:
-        plt.plot()
-        plt.plot(genderEmbeds[g1], neutralEmbeds[g1], label = 'Male', color = 'blue')
-        plt.plot(genderEmbeds[g2], neutralEmbeds[g2], label = 'Female', color = 'red')
+        plt.scatter(genderEmbeds[g1], neutralEmbeds[g1], label = 'Male', color = 'blue')
+        plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], label = 'Female', color = 'red')
         plt.xlabel('Gendered Cosine Distance')
         plt.ylabel('Neutral Cosine Distance')
         plt.title(f'{g1}/{g2} Distances From Word List')
@@ -118,6 +118,6 @@ def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, gend
             indices.append(spotlightWords.index(empWord))
         
         for index in indices:
-            plt.plot(genderEmbeds[g1][index], neutralEmbeds[g1][index], marker = '^', label = f'{spotlightWords[index]}', color = 'blue')
-            plt.plot(genderEmbeds[g2][index], neutralEmbeds[g2][index], marker = '^', label = f'{spotlightWords[index]}', color = 'red')
-    plt.plot()
+            plt.scatter(genderEmbeds[g1][index], neutralEmbeds[g1][index], marker = '^', label = f'{spotlightWords[index]}', color = 'blue')
+            plt.scatter(genderEmbeds[g2][index], neutralEmbeds[g2][index], marker = '^', label = f'{spotlightWords[index]}', color = 'red')
+    plt.show()
