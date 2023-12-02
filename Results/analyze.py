@@ -139,6 +139,7 @@ def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, gend
             plt.xlabel('Gendered Cosine Distance')
             plt.ylabel('Neutral Cosine Distance')
             plt.title(f'{g1}-{g2} Distances From Word List in {title}')
+            plt.legend()
             """
             indices = []
             for empWord in emphasize:
