@@ -55,9 +55,9 @@ def closestWordsDistances(spotlightWords: [str], embedGDict: dict , embedNDict: 
             topNWords = closestWordsNorm(embedNDict, embedNDict[word], n)
             for i in range(n):
                 if topGWords[i][0] in embedGDict.keys() and topGWords[i][0] in embedNDict.keys():
-                    distancesG.append(embedCos(embedGDict[topGWords[i][0]], embedGDict[word]))
+                    distancesG.append(abs(embedCos(embedGDict[topGWords[i][0]], embedGDict[word])))
                     #print(distancesG.append(embedCos(embedGDict[topGWords[i][0]], embedGDict[word])))
-                    distancesN.append(embedCos(embedNDict[topGWords[i][0]], embedNDict[word]))
+                    distancesN.append(abs(embedCos(embedNDict[topGWords[i][0]], embedNDict[word])))
     if sum(distancesG) == 0:
         percentDiff = 0
     else:
