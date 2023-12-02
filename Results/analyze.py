@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 def embeds(path: str):
     embeds = dict()
-    with open(path) as file:
+    with open(path, 'r', encoding= 'utf-8') as file:
         for line in file:
             tokens = line.rstrip().split()
             #print(tokens)
@@ -138,7 +138,7 @@ def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, gend
             plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], s= .5, label = 'Female', color = 'red')
             plt.xlabel('Gendered Cosine Distance')
             plt.ylabel('Neutral Cosine Distance')
-            plt.title(f'{g1}/{g2} Distances From Word List in {title}')
+            plt.title(f'{g1}-{g2} Distances From Word List in {title}')
             """
             indices = []
             for empWord in emphasize:
@@ -156,5 +156,5 @@ def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, gend
                 plt.scatter(genderEmbeds[spotlightWords[index]][index], neutralEmbeds[spotlightWords[index]][index], marker = '^', label = f'{spotlightWords[index]}', color = 'blue')
                 plt.scatter(genderEmbeds[g2][index], neutralEmbeds[g2][index], marker = '^', label = f'{spotlightWords[index]}', color = 'red')
             """
-        
+            plt.savefig(f'{g1}-{g2} Distances From Word List in {title}.png')
             plt.show()
