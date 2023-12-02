@@ -106,7 +106,7 @@ def distanceVector(spotlightWords: [str], pairs : [(str, str)], embeds: dict):
             embeds['DistanceVector'][g1] = g1Dists
             embeds['DistanceVector'][g2] = g2Dists
 
-def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, genderEmbeds: dict, emphasize:[str] = []):
+def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, genderEmbeds: dict, title: str, emphasize:[str] = []):
     
     gkeys = genderEmbeds.keys()
     nkeys = neutralEmbeds.keys()
@@ -117,14 +117,14 @@ def plotter(pairs:[(str, str)], spotlightWords: [str], neutralEmbeds: dict, gend
             plt.scatter(genderEmbeds[g2], neutralEmbeds[g2], s= .5, label = 'Female', color = 'red')
             plt.xlabel('Gendered Cosine Distance')
             plt.ylabel('Neutral Cosine Distance')
-            plt.title(f'{g1}/{g2} Distances From Word List')
+            plt.title(f'{g1}/{g2} Distances From Word List in {title}')
             """
             indices = []
             for empWord in emphasize:
             indices.append(spotlightWords.index(empWord))
             """
         
-        
+            
 
             x_values = np.linspace(min(min(genderEmbeds[g1]), min(neutralEmbeds[g1]), min(genderEmbeds[g2]), min(neutralEmbeds[g2])),\
                                 max(max(genderEmbeds[g1]), max(neutralEmbeds[g1]), max(genderEmbeds[g2]), max(neutralEmbeds[g2])), 1000)
